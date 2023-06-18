@@ -27,18 +27,18 @@ export default function MainContainer() {
                 let rn = route.name;
 
                 if(rn === GetName){
-                    iconName = focused ? 'home' : 'home-outline'
+                    iconName = focused ? 'arrow-down' : 'arrow-down'
                 }else if (rn === PostName){
-                    iconName = focused ? 'list' : 'list-outline'
+                    iconName = focused ? 'arrow-up' : 'arrow-up'
                 }else if (rn === PutName){
-                    iconName = focused ? 'settings' : 'settings-outline'
+                    iconName = focused ? 'create' : 'create'
                 }else{
-                    iconName = focused ? 'settings' : 'settings-outline'
+                    iconName = focused ? 'trash' : 'trash'
                 }
                 return <Ionicons name={iconName} size={size} color={color} />
             },
         })}
-        
+
 
         >
             <Tab.Screen name={GetName} component={GetScreen} />

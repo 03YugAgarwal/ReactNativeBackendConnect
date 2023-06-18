@@ -4,6 +4,8 @@ import { View, Text, TextInput, StyleSheet, Button } from "react-native";
 export default function GetScreen() {
   const [textContent, setTextContent] = useState("");
   const [Name, setName] = useState('')
+  const [Age, setAge] = useState('')
+  const [Salary, setSalary] = useState('')
 
   const handleTextChange = (e) => {
     setTextContent(e);
@@ -11,13 +13,15 @@ export default function GetScreen() {
 
   const fetchEmployee = () => {
     fetch(`https://dummy.restapiexample.com/api/v1/employee/${textContent}`)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        console.log(data);
+        console.log(data.data);
+        setName(data.data.employee_name)
+        setAge(data.data.employee_age)
+        setSalary(data.data.employee_salary)
     }).catch(error => {
         console.error(error);
     })
-    
   }
 
   return (
@@ -33,10 +37,10 @@ export default function GetScreen() {
         title="Get Employee Details"
         color="#841584"
       />
-      <Text>Fetched Values: {Name}</Text>
-      <Text>Employee Name: </Text>
-      <Text>Employee Salary: </Text>
-      <Text>Employee Image: </Text>
+      <Text>Fetched Values: </Text>
+      <Text>Employee Name: {Name}</Text>
+      <Text>Employee Age: {Age}</Text>
+      <Text>Employee Salary: {Salary}</Text>
     </View>
   );
 }
