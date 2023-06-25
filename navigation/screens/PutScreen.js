@@ -71,11 +71,18 @@ export default function PutScreen() {
         placeholder="Age"
       />
 
-      <Button
-        onPress={postEmployee}
-        title="Update Details"
-        color="#841584"
-      />
+      <Button onPress={postEmployee} title="Update Details" color="#841584" />
+
+      {successMsg ? (
+        <Text>
+          <Text>{successMsg.data.name}</Text>
+          <Text>{successMsg.data.age}</Text>
+          <Text>{successMsg.data.salary}</Text>
+          <Text>{successMsg.data.id}</Text>
+        </Text>
+      ) : (
+        <Text>Update a user</Text>
+      )}
     </View>
   );
 }

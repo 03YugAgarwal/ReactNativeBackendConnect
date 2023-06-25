@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 
 export default function PostScreen() {
@@ -6,42 +6,39 @@ export default function PostScreen() {
   const [Age, setAge] = useState("");
   const [Salary, setSalary] = useState("");
 
-  const [employee, setEmployee] = useState({})
+  const [employee, setEmployee] = useState({});
 
-
-  const [successMsg, setSuccessMsg] = useState()
+  const [successMsg, setSuccessMsg] = useState();
 
   const postEmployee = () => {
-    setEmployee({name: Name, age: Age, salary: Salary})
+    setEmployee({ name: Name, age: Age, salary: Salary });
 
-
-    fetch(`https://dummy.restapiexample.com/api/v1/create`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(employee)
+    fetch(`https://dummy.restapiexample.com/api/v1/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(employee),
     })
-    .then(response => response.json())
-    .then(data => {
-        setSuccessMsg(data)
+      .then((response) => response.json())
+      .then((data) => {
+        setSuccessMsg(data);
         console.log(data);
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         console.error(error);
-    })
-
+      });
   };
 
   const handleNameChange = (value) => {
-    setName(value)
-  }
+    setName(value);
+  };
   const handleAgeChange = (value) => {
-    setAge(value)
-  }
+    setAge(value);
+  };
   const handleSalaryChange = (value) => {
-    setSalary(value)
-  }
+    setSalary(value);
+  };
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -63,23 +60,29 @@ export default function PostScreen() {
         style={styles.input}
         placeholder="Age"
       />
-      
-      <Button
-        onPress={postEmployee}
-        title="Create Employee"
-        color="#841584"
-      />
+
+      <Button onPress={postEmployee} title="Create Employee" color="#841584" />
+      {successMsg ? (
+        <Text>
+          <Text>{successMsg.data.name}</Text>
+          <Text>{successMsg.data.age}</Text>
+          <Text>{successMsg.data.salary}</Text>
+          <Text>{successMsg.data.id}</Text>
+        </Text>
+      ) : (
+        <Text>Create a user</Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    input: {
-      height: 40,
-      margin: 8,
-      borderWidth: 2,
-      padding: 12,
-      width: 240,
-      borderRadius: 8,
-    },
-  });
+  input: {
+    height: 40,
+    margin: 8,
+    borderWidth: 2,
+    padding: 12,
+    width: 240,
+    borderRadius: 8,
+  },
+});
